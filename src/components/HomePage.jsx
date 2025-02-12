@@ -28,7 +28,7 @@ const HomePage = () => {
   const handleLogout = async () => {
     try {
       await axios.get('http://localhost:5000/api/users/logout', { withCredentials: true });
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       console.error('Logout Error:', err);
     }

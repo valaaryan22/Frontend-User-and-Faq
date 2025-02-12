@@ -24,7 +24,7 @@ const ProtectedRoute = ({ component: Component }) => {
   }
 
   if (isAuthenticated === false) {
-    return <Navigate to="/login" />; // Redirect to login if not authenticated
+    return <Navigate to="/" />; // Redirect to login if not authenticated
   }
 
   return <Component />; // Render the protected component if authenticated

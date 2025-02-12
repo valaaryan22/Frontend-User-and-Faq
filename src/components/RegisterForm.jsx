@@ -41,7 +41,7 @@ const RegisterForm = () => {
           const message = response.data.message; // Assuming the response has the "message" field
           alert(message);  // Show browser alert
           formik.resetForm(); // Reset form after successful registration
-          navigate('/login')
+          navigate('/')
         }
       } catch (error) {
         // Handle error and show message if email is already used or any other error
@@ -121,7 +121,7 @@ const RegisterForm = () => {
         </form>
         <p className='pt-4 pr-2 text-center'>
         Already have an account?{' '}
-        <Link to="/login" className='text-blue-700'>Login here</Link>
+        <Link to="/" className='text-blue-700'>Login here</Link>
       </p>
       </div>
 
