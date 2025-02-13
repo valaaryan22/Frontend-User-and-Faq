@@ -9,7 +9,7 @@ import RegisterForm from './components/RegisterForm';
 import UpdateFAQ from './components/UpdateFAQ';
 import PaymentPage from './components/PaymentPage'; // Import the PaymentPage component
 import './i18n';
-
+import PaymentPageUser from './components/PaymentPageUser'
 function App() {
   return (
     <>
@@ -23,6 +23,8 @@ function App() {
 
           {/* Add the PaymentPage route */}
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment/:order/:amount" element={<PaymentPageUser />} />
+
 
           {/* Catch-all route for 404 errors */}
           <Route path="*" element={<div>404 - Not Found</div>} />
@@ -30,6 +32,7 @@ function App() {
           {/* FAQ Routes */}
           <Route path="/faqs" element={<FAQList />} />
           <Route path="/add-faq" element={<AddFAQ />} />
+
           <Route path="/update-faq/:faqId" element={<UpdateFAQ />} />
           <Route path="/delete-faq/:id" element={<DeleteFAQ />} />
         </Routes>
