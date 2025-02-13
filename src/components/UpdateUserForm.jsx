@@ -2,9 +2,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import for translations
 
 const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation(); // useTranslation hook to get translation functions
 
   const formik = useFormik({
     initialValues: {
@@ -13,19 +15,22 @@ const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
       newEmail: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().min(2, 'Name should be at least 2 characters').required('Name is required'),
-      email: Yup.string().email('Please enter a valid email address').required('Email is required'),
-      newEmail: Yup.string().email('Please enter a valid new email').required('New email is required'),
+      name: Yup.string().min(2, t('name_min')) // Translated validation message
+        .required(t('name_required')), // Translated validation message
+      email: Yup.string().email(t('email_invalid')) // Translated validation message
+        .required(t('email_required')), // Translated validation message
+      newEmail: Yup.string().email(t('new_email_invalid')) // Translated validation message
+        .required(t('new_email_required')), // Translated validation message
     }),
     onSubmit: async (values) => {
       try {
         const { name, email, newEmail } = values;
         const response = await axios.put('http://localhost:5000/api/users/updatedata', { email, name, newEmail }, { withCredentials: true });
         onUserUpdated(prevUsers => prevUsers.map(user => user.email === email ? { ...user, name, email: newEmail } : user));
-        alert('User updated successfully!');
+        alert(t('profile_updated')); // Use translation for success message
         onClose(); // Close the update form after success
       } catch (err) {
-        alert('Error updating user');
+        alert(t('error_updating')); // Translated error message
         console.error(err);
       }
     },
@@ -33,10 +38,10 @@ const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
 
   return (
     <div className="mt-8 p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Update User</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">{t('update_user')}</h2> {/* Translated Title */}
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700">Name</label>
+          <label htmlFor="name" className="block text-gray-700">{t('name')}</label> {/* Translated Field Label */}
           <input
             type="text"
             id="name"
@@ -49,7 +54,7 @@ const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
           {formik.touched.name && formik.errors.name && <div className="text-red-500 text-sm">{formik.errors.name}</div>}
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">Email</label>
+          <label htmlFor="email" className="block text-gray-700">{t('email')}</label> {/* Translated Field Label */}
           <input
             type="email"
             id="email"
@@ -62,7 +67,7 @@ const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
           {formik.touched.email && formik.errors.email && <div className="text-red-500 text-sm">{formik.errors.email}</div>}
         </div>
         <div className="mb-4">
-          <label htmlFor="newEmail" className="block text-gray-700">New Email</label>
+          <label htmlFor="newEmail" className="block text-gray-700">{t('new_email')}</label> {/* Translated Field Label */}
           <input
             type="email"
             id="newEmail"
@@ -80,13 +85,13 @@ const UpdateUserForm = ({ user, onClose, onUserUpdated }) => {
             onClick={onClose} // Close the form without saving
             className="bg-gray-300 text-gray-800 py-2 px-4 rounded-md"
           >
-            Back
+            {t('back')} {/* Translated Button */}
           </button>
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
           >
-            Save Changes
+            {t('save_changes')} {/* Translated Button */}
           </button>
         </div>
       </form>

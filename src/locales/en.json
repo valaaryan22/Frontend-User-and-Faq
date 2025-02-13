@@ -1,0 +1,15 @@
+
+{
+    "user_list": "User List",
+    "name": "Name",
+    "email": "Email",
+    "actions": "Actions",
+    "update": "Update",
+    "delete": "Delete",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "Error fetching users",
+    "delete_confirmation": "Are you sure you want to delete this user?",
+    "profile_updated": "Profile Updated Successfully"
+  }
+  

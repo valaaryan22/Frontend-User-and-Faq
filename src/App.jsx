@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import HomePage from './components/HomePage';
-import ProtectedRoute from './components/ProtectedRoute';
-import FAQList from './components/FAQList';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import AddFAQ from './components/AddFAQ';
-import UpdateFAQ from './components/UpdateFAQ';
 import DeleteFAQ from './components/DeleteFAQ';
-
+import FAQList from './components/FAQList';
+import HomePage from './components/HomePage';
+import LoginForm from './components/LoginForm';
+import ProtectedRoute from './components/ProtectedRoute';
+import RegisterForm from './components/RegisterForm';
+import UpdateFAQ from './components/UpdateFAQ';
+import './i18n';
 function App() {
-  return (
+  return (<>
     <Router>
       <Routes>
         <Route path="/" element={<LoginForm />} />
@@ -28,6 +28,9 @@ function App() {
         <Route path="/delete-faq/:id" element={<DeleteFAQ />} />
       </Routes>
     </Router>
+    
+    </>
+    
   );
 }
 

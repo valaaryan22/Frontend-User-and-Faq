@@ -1,0 +1,14 @@
+{
+    "user_list": "Liste des utilisateurs",
+    "name": "Nom",
+    "email": "E-mail",
+    "actions": "Actions",
+    "update": "Mettre à jour",
+    "delete": "Supprimer",
+    "logout": "Déconnexion",
+    "loading": "Chargement...",
+    "error": "Erreur lors de la récupération des utilisateurs",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "profile_updated": "Profil mis à jour avec succès"
+  }
+  
