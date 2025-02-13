@@ -23,7 +23,7 @@ function App() {
 
           {/* Add the PaymentPage route */}
           <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/payment/:order/:amount" element={<PaymentPageUser />} />
+          <Route path="/payment/:order/:amount1" element={<PaymentPageUser />} />
 
 
           {/* Catch-all route for 404 errors */}

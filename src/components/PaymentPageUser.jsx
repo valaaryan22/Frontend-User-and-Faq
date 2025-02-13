@@ -1,5 +1,6 @@
 import axios from 'axios';
 import  { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const PaymentPage = () => {
     const [amount, setAmount] = useState('');
@@ -7,7 +8,7 @@ const PaymentPage = () => {
     const [userEmail, setUserEmail] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const { order, amount1 } = useParams();
     // Razorpay key from environment variable
     const RAZORPAY_KEY_ID = 'rzp_test_kWbuztJHjjMxDu';
 
@@ -35,7 +36,7 @@ const PaymentPage = () => {
             return;
         }
 
-        if (!amount || amount <= 0) {
+        if (!amount1 || amount1 <= 0) {
             setError('Please enter a valid amount');
             return;
         }
@@ -44,10 +45,10 @@ const PaymentPage = () => {
         setPaymentStatus('');
 
         try {
-            console.log('Creating order with:', { amount, userEmail });
+            console.log('Creating order with:', { amount1, userEmail });
 
             const response = await axios.post('http://localhost:5000/api/payment/create-order1', {
-                amount: parseFloat(amount),
+                amount: parseFloat(amount1),
                 userEmail: userEmail
             });
 
@@ -156,15 +157,15 @@ const PaymentPage = () => {
                                 step="any"
                                 className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="Enter amount"
-                                value={amount}
-                                onChange={(e) => setAmount(e.target.value)}
+                                value={amount1}
+                                
                             />
                         </div>
 
                         <button
                             onClick={createOrder}
-                            disabled={!userEmail || !amount || loading}
-                            className={`w-full py-2 ${!userEmail || !amount || loading 
+                            disabled={!userEmail || !amount1 || loading}
+                            className={`w-full py-2 ${!userEmail || !amount1 || loading 
                                 ? 'bg-gray-400' 
                                 : 'bg-indigo-600 hover:bg-indigo-700'} 
                                 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300`}
